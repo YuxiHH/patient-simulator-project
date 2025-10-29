@@ -1,14 +1,8 @@
+Clinical Scenario
+1. Lab Result Explanation
 
+EHR Schema
 
----
-
-# Clinical Scenario
-
-## 1. Lab Result Explanation
-
-**EHR Schema**
-
-```json
 {
   "lab": {
     "name": "Creatinine",
@@ -20,20 +14,20 @@
     "date": "2025-10-12"
   }
 }
-```
 
-* **Typical misunderstandings:** confusion about “creatinine”; underestimating severity (“a little high is fine”); timeline confusion.
-* **Simulation goals:** low literacy + mild anxiety → trigger requests for clarification or analogy.
-* **Prompt keys:** `literacy_level=low`, `numeracy_level=low`, `emotion_state=anxious`, `knowledge_gap=lab_terms`
-* **Escalation:** if acute symptoms or critical value appear → mark *refer to clinician*.
 
----
+Typical misunderstandings: confusion about “creatinine”; underestimating severity (“a little high is fine”); timeline confusion.
 
-## 2. Radiology Findings
+Simulation goals: low literacy + mild anxiety → trigger requests for clarification or analogy.
 
-**EHR Schema**
+Prompt keys: literacy_level=low, numeracy_level=low, emotion_state=anxious, knowledge_gap=lab_terms
 
-```json
+Escalation: if acute symptoms or critical value appear → mark refer to clinician.
+
+2. Radiology Findings
+
+EHR Schema
+
 {
   "imaging": {
     "modality": "CT Chest",
@@ -41,20 +35,20 @@
     "impression": "likely benign; follow-up in 12 months"
   }
 }
-```
 
-* **Typical misunderstandings:** benign vs malignant confusion; interpreting “follow-up” as “no problem.”
-* **Simulation goals:** moderate literacy + anxiety/fear; include causal confusion (“stress caused it”).
-* **Prompt keys:** `emotion_state=anxious`, `reasoning_bias=causal_confusion`
-* **Escalation:** repeated “Is it cancer?” with rising distress → add reassurance + uncertainty statement.
 
----
+Typical misunderstandings: benign vs malignant confusion; interpreting “follow-up” as “no problem.”
 
-## 3. Pathology and Staging
+Simulation goals: moderate literacy + anxiety/fear; include causal confusion (“stress caused it”).
 
-**EHR Schema**
+Prompt keys: emotion_state=anxious, reasoning_bias=causal_confusion
 
-```json
+Escalation: repeated “Is it cancer?” with rising distress → add reassurance + uncertainty statement.
+
+3. Pathology and Staging
+
+EHR Schema
+
 {
   "pathology": {
     "site": "breast",
@@ -63,20 +57,20 @@
     "marker": { "ER": "+", "PR": "+", "HER2": "-" }
   }
 }
-```
 
-* **Typical misunderstandings:** mixing grade vs stage vs biomarkers; wrong inference about therapy.
-* **Simulation goals:** high information density → cognitive overload.
-* **Prompt keys:** `info_complexity=high`, `overload_trigger=true`, `literacy=medium`
-* **Escalation:** if treatment decision questions arise → respond neutrally (no advice).
 
----
+Typical misunderstandings: mixing grade vs stage vs biomarkers; wrong inference about therapy.
 
-## 4. Genetic Testing (Variant of Uncertain Significance)
+Simulation goals: high information density → cognitive overload.
 
-**EHR Schema**
+Prompt keys: info_complexity=high, overload_trigger=true, literacy=medium
 
-```json
+Escalation: if treatment decision questions arise → respond neutrally (no advice).
+
+4. Genetic Testing (Variant of Uncertain Significance)
+
+EHR Schema
+
 {
   "genetics": {
     "gene": "BRCA1",
@@ -84,20 +78,20 @@
     "note": "clinical significance uncertain; recommend family history review"
   }
 }
-```
 
-* **Typical misunderstandings:** treating VUS as pathogenic; assuming relatives are at risk; probability misreads.
-* **Simulation goals:** term confusion + high anxiety + risk misinterpretation + family concern.
-* **Prompt keys:** `emotion_state=anxious`, `knowledge_gap=genetic_terms`, `numeracy_level=low`
-* **Escalation:** requests for family testing → provide conceptual info only, *no clinical advice*.
 
----
+Typical misunderstandings: treating VUS as pathogenic; assuming relatives are at risk; probability misreads.
 
-## 5. Medication and Adherence
+Simulation goals: term confusion + high anxiety + risk misinterpretation + family concern.
 
-**EHR Schema**
+Prompt keys: emotion_state=anxious, knowledge_gap=genetic_terms, numeracy_level=low
 
-```json
+Escalation: requests for family testing → provide conceptual info only, no clinical advice.
+
+5. Medication and Adherence
+
+EHR Schema
+
 {
   "med": {
     "name": "Metformin",
@@ -106,20 +100,20 @@
     "indication": "T2DM"
   }
 }
-```
 
-* **Typical misunderstandings:** wrong dose/frequency; conflict with culture/diet; fear of side effects.
-* **Simulation goals:** language mismatch & cultural nuance prompting clarification.
-* **Prompt keys:** `primary_language=Spanish`, `bilingual=true`, `cultural_context=Latin`
-* **Escalation:** severe adverse reaction mentioned → flag *contact healthcare provider*.
 
----
+Typical misunderstandings: wrong dose/frequency; conflict with culture/diet; fear of side effects.
 
-## 6. Chemotherapy / Radiation Toxicities
+Simulation goals: language mismatch & cultural nuance prompting clarification.
 
-**EHR Schema**
+Prompt keys: primary_language=Spanish, bilingual=true, cultural_context=Latin
 
-```json
+Escalation: severe adverse reaction mentioned → flag contact healthcare provider.
+
+6. Chemotherapy / Radiation Toxicities
+
+EHR Schema
+
 {
   "therapy": {
     "type": "Chemo",
@@ -128,20 +122,20 @@
     "adverse_events": ["nausea", "mild neuropathy"]
   }
 }
-```
 
-* **Typical misunderstandings:** common side effects perceived as life-threatening; ignoring danger signs.
-* **Simulation goals:** emotional dynamics (fear → denial → anger).
-* **Prompt keys:** `emotion_state=anxious→anger`, `mood=irritable`
-* **Escalation:** red-flag terms like “chest pain” or “shortness of breath” → immediate escalation.
 
----
+Typical misunderstandings: common side effects perceived as life-threatening; ignoring danger signs.
 
-## 7. Post-Surgery Follow-Up
+Simulation goals: emotional dynamics (fear → denial → anger).
 
-**EHR Schema**
+Prompt keys: emotion_state=anxious→anger, mood=irritable
 
-```json
+Escalation: red-flag terms like “chest pain” or “shortness of breath” → immediate escalation.
+
+7. Post-Surgery Follow-Up
+
+EHR Schema
+
 {
   "surgery": {
     "procedure": "laparoscopic cholecystectomy",
@@ -149,20 +143,20 @@
     "instructions": ["no heavy lifting 2 weeks"]
   }
 }
-```
 
-* **Typical misunderstandings:** timeline/restriction confusion; overload.
-* **Simulation goals:** include *teach-back* (“Can you say what you understood?”).
-* **Prompt keys:** `literacy=low`, `ask_for_teachback=true`
-* **Escalation:** if signs of complications or severe pain reported → *refer to clinician*.
 
----
+Typical misunderstandings: timeline/restriction confusion; overload.
 
-## 8. Insurance / Financial Counseling
+Simulation goals: include teach-back (“Can you say what you understood?”).
 
-**EHR Schema**
+Prompt keys: literacy=low, ask_for_teachback=true
 
-```json
+Escalation: if signs of complications or severe pain reported → refer to clinician.
+
+8. Insurance / Financial Counseling
+
+EHR Schema
+
 {
   "finance": {
     "item": "PET-CT",
@@ -170,20 +164,20 @@
     "copay": "$200"
   }
 }
-```
 
-* **Typical misunderstandings:** “pre-authorization = denial”; anger or distrust.
-* **Simulation goals:** tone mismatch and socioeconomic tension.
-* **Prompt keys:** `emotion_state=angry`, `tone_mismatch=true`, `cultural_context=working_class`
-* **Escalation:** if hostility escalates → de-escalation language + offer to connect billing support.
 
----
+Typical misunderstandings: “pre-authorization = denial”; anger or distrust.
 
-## 9. Clinical Trial Consent
+Simulation goals: tone mismatch and socioeconomic tension.
 
-**EHR Schema**
+Prompt keys: emotion_state=angry, tone_mismatch=true, cultural_context=working_class
 
-```json
+Escalation: if hostility escalates → de-escalation language + offer to connect billing support.
+
+9. Clinical Trial Consent
+
+EHR Schema
+
 {
   "trial": {
     "id": "NCTxxxx",
@@ -192,31 +186,32 @@
     "key_points": ["potential benefit unknown", "extra visits required"]
   }
 }
-```
 
-* **Typical misunderstandings:** randomization seen as unfair; therapeutic misconception (trial = better care).
-* **Simulation goals:** uncertainty communication and value trade-offs.
-* **Prompt keys:** `numeracy=low`, `reasoning_bias=therapeutic_misconception`
-* **Escalation:** hesitation/withdrawal → provide neutral procedural info only (no persuasion).
 
----
+Typical misunderstandings: randomization seen as unfair; therapeutic misconception (trial = better care).
 
-## 10. Prognosis / End-of-Life Conversations
+Simulation goals: uncertainty communication and value trade-offs.
 
-**EHR Schema**
+Prompt keys: numeracy=low, reasoning_bias=therapeutic_misconception
 
-```json
+Escalation: hesitation/withdrawal → provide neutral procedural info only (no persuasion).
+
+10. Prognosis / End-of-Life Conversations
+
+EHR Schema
+
 {
   "prognosis": {
     "status": "uncertain",
     "recommendation": "discuss supportive care options"
   }
 }
-```
 
-* **Typical misunderstandings:** population survival stats taken as personal fate; strong emotional swings.
-* **Simulation goals:** emotional trajectory (anxiety → denial/hope/hopelessness).
-* **Prompt keys:** `emotion_state=anxious→denial|hope|hopeless`, `safety_sensitive=true`
-* **Escalation:** any despair or self-harm language → terminate simulation and escalate immediately.
 
----
+Typical misunderstandings: population survival stats taken as personal fate; strong emotional swings.
+
+Simulation goals: emotional trajectory (anxiety → denial/hope/hopelessness).
+
+Prompt keys: emotion_state=anxious→denial|hope|hopeless, safety_sensitive=true
+
+Escalation: any despair or self-harm language → terminate simulation and escalate immediately.
