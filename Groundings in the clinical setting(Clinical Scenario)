@@ -1,4 +1,7 @@
 
+
+---
+
 # Clinical Scenario
 
 ## 1. Lab Result Explanation
@@ -17,7 +20,7 @@
     "date": "2025-10-12"
   }
 }
-````
+```
 
 * **Typical misunderstandings:** confusion about “creatinine”; underestimating severity (“a little high is fine”); timeline confusion.
 * **Simulation goals:** low literacy + mild anxiety → trigger requests for clarification or analogy.
@@ -216,4 +219,4 @@
 * **Prompt keys:** `emotion_state=anxious→denial|hope|hopeless`, `safety_sensitive=true`
 * **Escalation:** any despair or self-harm language → terminate simulation and escalate immediately.
 
-```
+---
